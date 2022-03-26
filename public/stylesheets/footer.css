@@ -1,0 +1,48 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Poppins'
+}
+
+footer{
+    min-height: 10vh;
+    background-color:#2d2d2d;
+    color: rgb(248, 248, 248);
+    bottom: 0;
+    left: 0;
+   /* position: fixed;*/
+    width: 100%;
+}
+
+.logo{
+    color:#099c22;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 2rem;   
+    text-align: center;
+}
+
+ul{
+    
+    list-style: none;
+    
+
+}
+
+li{
+    margin: 10px;
+    font-size: 15px;
+    
+}
+
+.footer{
+    display: flex;
+    justify-content: space-around;
+  
+    
+}
+
+.titulo{
+    font-size: 20px;
+}

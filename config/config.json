@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "db_speedlog",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+ 
+}

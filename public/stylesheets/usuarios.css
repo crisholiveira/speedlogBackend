@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Poppins';
+    
+}
+
+body{
+    background-color: rgb(208, 214, 214);
+}
+
+.caixinha{
+        background-color:#2d2d2d;
+        min-height: 20vh;
+        min-width: 25vh;
+        margin: 1rem;
+        padding: 35px;
+        border-radius: 10.5px;
+        text-align: center;      
+    
+}
+
+p, a {
+    color: white;
+   
+}
+
+#grandeCaixa{
+    display: flex;
+    justify-content: center;
+    margin-top: 20vh;
+}
+
+.caixinha a{
+        font-size: 4rem;
+}

@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Poppins'
+}
+
+body {
+   
+    background-color:   #2d2d2d;
+}
+
+
+#logo h1 {
+    margin-top: 10vh;
+    color:#099c22;
+    font-family: 'Patrick Hand';
+    margin-bottom: 20px;
+    font-size: 3rem;
+    text-align: center;
+}
+
+
+a, label {
+    font-size: 0.8rem;
+}
+
+#login-container {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 30px;
+    margin-top: 10vh;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+form{
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+input, label {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+
+}
+
+input {
+    border-bottom: 2px solid #099c22; 
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+#esqueceu-senha {
+    text-align: right;
+    display: block;
+
+}
+
+input[type="submit"] {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 30px;
+    color: white;
+    background-color: #099c22;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #1d792c;
+    transition: 5s;
+}

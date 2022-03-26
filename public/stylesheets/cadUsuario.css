@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(208, 214, 214);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.card{
+    background-color: rgb(250, 250, 250);
+    padding: 40px;
+    border-radius: 8%;
+    box-shadow: 3px 3px 1px 0 #00000050;
+    
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.label-float input{
+    width: 100%;
+    padding: 5px 5px;
+    display: inline-block;
+    border: 0;
+    border-bottom: 1px solid #000;
+    background-color: transparent;
+    outline: none;
+    min-width: 400px;
+    font-size: 18px;
+    transition: all .3s ease-out;
+}
+
+.label-float{
+    position: relative;
+    padding-top: 13px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.label-float input:focus{
+    border-bottom: 2px solid #000;
+}
+
+.label-float label{
+    color: rgb(0, 0, 0);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 13px;
+    transition: all .3s ease-out;
+}
+
+.label-float input:focus + label{
+    font-size: 12px;
+    margin-top: 0;
+    color: black;
+}
+
+button{
+    background-color: transparent;
+    border-color: black;
+    color: black;
+    padding: 5px;
+    font-size: 12pt;
+    margin-top: 20px;
+    border-radius: 8%;
+    cursor: pointer;
+    outline: node;
+}
+
+button:hover{
+    background-color: rgb(27, 168, 81);
+    color: white;
+    transition: all .3s ease-out;
+}

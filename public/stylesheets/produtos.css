@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Poppins'
+}
+
+.pesquisa {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+    
+
+.container-principal h1 {
+    text-align: center;
+}
+
+.item{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+h1 {
+    padding: 15px;
+}
+.tabela {
+    width: 90vw;
+}
+
+
+.tabela td {
+    border-bottom: solid 1px black;
+    padding: 20px;
+}
+.tabela th {
+    border: solid 1px black;
+    padding: 20px;
+}
+
+form{
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+input, label {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+
+}
+
+input {
+    border-bottom: 2px solid #099c22; 
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+#esqueceu-senha {
+    text-align: right;
+    display: block;
+
+}
+
+input[type="submit"] {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 30px;
+    color: white;
+    background-color: #099c22;
+    cursor: pointer;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type="submit"]:hover {
+    background-color: #1d792c;
+    transition: 5s;
+}
+
+input[type="reset"] {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 30px;
+    color: white;
+    background-color: #099c22;
+    cursor: pointer;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type="reset"]:hover {
+    background-color: #1d792c;
+    transition: 5s;
+}
+
+.pageItem {
+    display: inline-block;
+    padding: 5px;
+}
+.pageItem a {
+    text-decoration: none;
+}
+
+.botao {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    margin-top: 30px;
+    color: white;
+    background-color: #099c22;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+.botao:hover {
+    background-color: #1d792c;
+    transition: 5s;
+}
+
+a {
+    text-decoration: none;    
+    }
+
+li {
+    list-style-type: none;
+}
+
+.container-confirmacao {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0,0,0,.5);
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.container-confirmacao.mostrar {
+    display: flex;
+}
+
+
+.confirmacao {
+    text-align: center;
+    background-color: white;
+    width: 100px;
+    min-width: 500px;
+    padding: 40px;
+    border: solid 6px #099c22;
+    box-shadow: 0 0 0 10px white;
+    position: relative;
+
+}
+
+.fechar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: solid 4px white;
+    background: #099c22;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2em;
+
+}
+
+.btn-cancelar {
+    display: flex;
+    flex-direction: row;
+    margin: 40px;
+   
+    
+}

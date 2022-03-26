@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Poppins'
+}
+
+header {
+    min-height: 10vh;
+    background-color:#2d2d2d;
+
+}
+
+.header-container a {
+    color: white;
+}
+
+
+
+.header-container {
+    padding: 1.5rem;
+    
+}
+
+.logo {
+    color:#099c22;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 2rem;    
+    padding: 3rem;   
+
+}
+
+
+.icone-voltar {
+    font-size: 2rem;
+    color: white;
+    
+    
+    
+}
+
+.icone-notificacao {
+    font-size: 2rem;
+    color: white;
+    float: right;
+    padding-right: 1.5rem;
+                    
+}
+
+.bem-vindo {
+    color: white;
+    float: right;
+        
+}
+.bem-vindo h4 {
+    padding-right: 2rem;
+}
+@media (max-width: 768px){
+    .logo{
+        display: none;
+    }
+}
