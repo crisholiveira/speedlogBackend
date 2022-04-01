@@ -113,7 +113,7 @@ const produtosController = {
 
     search: (req, res) => {
         let { page = 1 } = req.query
-        let { key } = req.query;
+        let key  = req.params.id;
         let opt = {
             order: [[`nome`, `ASC`]], limit: 10,
             offset: (page - 1) * 10
@@ -122,6 +122,7 @@ const produtosController = {
         if (key) { 
             opt.where =  {
                 [Op.or]: {
+                    id: { [Op.like]: `%${key}%` },
                     nome: { [Op.like]: `%${key}%` },
                     codigo: { [Op.like]: `%${key}%` }
                 }}

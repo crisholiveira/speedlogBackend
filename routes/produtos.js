@@ -3,10 +3,9 @@ var router = express.Router();
 const produtosController = require('../controllers/produtosController')
 
 router.get('/', produtosController.index)
-router.get('/search', produtosController.search)
+router.get('/:id', produtosController.search)
 router.post('/', produtosController.store)
-router.put('/editar/:id', produtosController.update)
-router.get('/:id', produtosController.consult)
+router.put('/:id', produtosController.update)
 router.delete('/:id', produtosController.destroy)
 
 
