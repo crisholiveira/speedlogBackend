@@ -4,45 +4,57 @@ const Op = Sequelize.Op
 
 
 const usuariosController = {
-    index: async (req, res) => {
+    index: (req, res) => {
         let { page = 1 } = req.query
-        let { count: total, rows: usuarios } = await Usuario.findAndCountAll({
+        Usuario.findAndCountAll({
             limit: 10,
             offset: (page - 1) * 10
 
         })
-        let totalPagina = Math.round(total / 10)
-        return res.render('usuarios', { usuarios, totalPagina })
-
+            .then(({ count: total, rows: usuarios }) => {
+                let totalPagina = Math.round(total / 10)
+                res.status(200).send({ usuarios, totalPagina });
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || 'Erro'
+                })
+            })
     },
-    create: (req, res) => {
+
+    /*create: (req, res) => {
 
         return res.render('cadastroUsuario')
-    },
-    store: async (req, res) => {
+    },*/
+
+    store: (req, res) => {
         const { nome, sobrenome, setor, ativo, perfil, email } = req.body;
-        const inclusao = await Usuario.create({
+        Usuario.create({
             nome,
             sobrenome,
             setor,
             ativo,
             perfil,
             email
-        });
-        console.log(inclusao)
-        return res.redirect('/usuarios')
+        })
+            .then(inclusao => {
+                res.status(200).send(inclusao);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || 'Erro'
+                })
+            })
 
     },
-    edit: async (req, res) => {
-        const { id } = req.params;
-        const usuario = await Usuario.findByPk(id);
-        return res.render('editarUsuarios', { usuario })
 
-    },
-    update: async (req, res) => {
+
+    update: (req, res) => {
         const { id } = req.params;
         const { nome, sobrenome, setor, ativo, perfil, email } = req.body;
-        const usuario = await Usuario.update({
+        Usuario.update({
             nome,
             sobrenome,
             setor,
@@ -56,57 +68,88 @@ const usuariosController = {
                 }
 
             })
-        console.log(usuario)
-        return res.redirect(`/usuarios/ver/${id}`)
-
-        /*return res.redirect('/produtos')*/
+            .then(usuario => {
+                res.status(200).send(usuario)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || 'Erro'
+                })
+            })
 
     },
 
-    consult: async (req, res) => {
+    consult: (req, res) => {
         const { id } = req.params;
-        const usuario = await Usuario.findByPk(id);
-        return res.render('excluirUsuario', { usuario })
-    },
+        Usuario.findByPk(id)
+        .then(usuario => {
+            res.status(200).send(usuario);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || 'Erro'
+            })
 
-    destroy: async (req, res) => {
+        })
+
+},
+
+    destroy: (req, res) => {
         const { id } = req.params;
-        const usuario = await Usuario.destroy({
-            where: { id }
+Usuario.destroy({
+    where: { id }
 
+})
+    .then(usuario => {
+        res.status(200).send(usuario);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || 'Erro'
         })
-        return res.redirect('/usuarios')
+
+    })
+        
 
     },
 
-    findByCod: async (req, res) => {
-        let { id } = req.params;
-        let usuario = await Usuario.findOne({
-            where: {
-                id: id
-            }
-        })
-        return res.render('consultarUsuarios', { usuario })
-    },
-    search: async (req, res) => {
-        let { page = 1 } = req.query
-        let { key } = req.query;
-        let { count: total, rows: usuarios } = await Usuario.findAndCountAll({
-            where: {
-                [Op.or]: {
-                    nome: { [Op.like]: `%${key}%` },
-                    sobrenome: { [Op.like]: `%${key}%` }
-                }
-            },
-            order: [[`nome`, `ASC`]],
-            limit: 10,
-            offset: (page - 1) * 10
-        })
-        let totalPagina = Math.round(total / 10)
-        return res.render('usuarios', { usuarios, totalPagina })
 
+
+search: (req, res) => {
+    let { page = 1 } = req.query
+    let key = req.params.id;
+    let opt = {
+        order: [[`nome`, `ASC`]], limit: 10,
+        offset: (page - 1) * 10
     }
+
+    if (key) {
+        opt.where = {
+            [Op.or]: {
+                id: { [Op.like]: `%${key}%` },
+                nome: { [Op.like]: `%${key}%` },
+                sobrenome: { [Op.like]: `%${key}%` }
+            }
+        }
+    }
+    Usuario.findAndCountAll(opt)
+        .then(({ count: total, rows: usuarios }) => {
+            let totalPagina = Math.round(total / 10)
+            res.status(200).send({ usuarios, totalPagina });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || 'Erro'
+            })
+        })
+},
+
 }
+
 module.exports = usuariosController
 
 

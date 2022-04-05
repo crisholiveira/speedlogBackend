@@ -3,15 +3,9 @@ var router = express.Router();
 const usuariosController = require('../controllers/usuariosController')
 
 router.get('/', usuariosController.index)
-router.get('/ver/:id', usuariosController.findByCod)
-router.get('/search', usuariosController.search)
-router.get('/cadastro', usuariosController.create)
-router.post('/cadastro', usuariosController.store)
-router.get('/editar/:id', usuariosController.edit)
-router.post('/editar/:id', usuariosController.update)
-router.get('/excluir/:id', usuariosController.consult)
-router.post('/excluir/:id', usuariosController.destroy)
+router.get('/:id', usuariosController.search)
+router.post('/', usuariosController.store)
+router.put('/:id', usuariosController.update)
+router.delete('/:id', usuariosController.destroy)
 
-
- 
-  module.exports = router;
+module.exports = router;
