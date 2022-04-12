@@ -1,6 +1,7 @@
 const { Usuario, sequelize } = require('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const {check, validationResult, body} = require('express-validator');
 
 
 const usuariosController = {
@@ -43,7 +44,7 @@ const usuariosController = {
             })
             .catch(err => {
                 res.status(500).send({
-                    message:
+                    message: 
                         err.message || 'Erro'
                 })
             })
