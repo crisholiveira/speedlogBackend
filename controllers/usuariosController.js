@@ -4,7 +4,6 @@ const Op = Sequelize.Op
 
 
 
-
 const usuariosController = {
     getAll: (req, res) => {
         let { page = 1, filtro: key } = req.query        
@@ -40,13 +39,48 @@ const usuariosController = {
                         err.message || 'Erro'
                 })
             })
+<<<<<<< HEAD
 
     },
 
     
+=======
+    },
+    //REVER DAQUI PARA BAIXO
+    create: (req, res) => {
 
+        let {nome, sobrenome, setor, ativo, perfil, email, senha} = req.body;
+        let senhaHash = bcrypt.hashSync(senha,10);
+        let novoUsuario = {
+            id: uuid(),
+            nome,
+            sobrenome,
+            setor,
+            ativo,
+            perfil,
+            email,
+            senha: senhaHash
+        }
+
+        fs.writeFileSync('usuarios.json', JSON.stringify(novoUsuario));
+        res.status(201).json(novoUsuario);
+        
+>>>>>>> iniciando configurações de session
+
+        return res.render('cadastroUsuario')
+    },
+    //REVER DAQUI PRA CIMA 
     store: (req, res) => {
+<<<<<<< HEAD
         const { nome, sobrenome, setor, ativo, perfil, email, senha } = req.body;
+=======
+        const listaDeErros = validationResult(req);
+
+        if(listaDeErros.isEmpty()){
+
+        const { nome, sobrenome, setor, ativo, perfil, email, senha } = req.body;
+
+>>>>>>> iniciando configurações de session
         Usuario.create({
             nome,
             sobrenome,
@@ -67,7 +101,10 @@ const usuariosController = {
 
             })
 
-    },
+    } else {
+        res.send('Houve algum erro nas informações preenchidas.')
+        }
+    } ,
 
 
     update: (req, res) => {
