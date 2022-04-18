@@ -2,6 +2,10 @@ const { Usuario, sequelize } = require('../models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const {check, validationResult, body} = require('express-validator');
+const bcrypt = require('bcrypt')
+const {uuid} = require('uuidv4')
+const fs = require('fs')
+
 
 
 
@@ -41,13 +45,37 @@ const usuariosController = {
                         err.message || 'Erro'
                 })
             })
-
     },
+    //REVER DAQUI PARA BAIXO
+    create: (req, res) => {
 
-    
+        let {nome, sobrenome, setor, ativo, perfil, email, senha} = req.body;
+        let senhaHash = bcrypt.hashSync(senha,10);
+        let novoUsuario = {
+            id: uuid(),
+            nome,
+            sobrenome,
+            setor,
+            ativo,
+            perfil,
+            email,
+            senha: senhaHash
+        }
 
+        fs.writeFileSync('usuarios.json', JSON.stringify(novoUsuario));
+        res.status(201).json(novoUsuario);
+        
+
+        return res.render('cadastroUsuario')
+    },
+    //REVER DAQUI PRA CIMA 
     store: (req, res) => {
+        const listaDeErros = validationResult(req);
+
+        if(listaDeErros.isEmpty()){
+
         const { nome, sobrenome, setor, ativo, perfil, email, senha } = req.body;
+
         Usuario.create({
             nome,
             sobrenome,
@@ -68,7 +96,10 @@ const usuariosController = {
 
             })
 
-    },
+    } else {
+        res.send('Houve algum erro nas informações preenchidas.')
+        }
+    } ,
 
 
     update: (req, res) => {
