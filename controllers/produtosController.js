@@ -4,12 +4,25 @@ const Op = Sequelize.Op
 
 
 const produtosController = {
-    index: (req, res) => {
-        let { page = 1 } = req.query
-        Produto.findAndCountAll({
+    getAll: (req, res) => {
+        let { page = 1, filtro: key } = req.query        
+        let opt = {
+            order: [[`nome`, `ASC`]], 
             limit: 10,
             offset: (page - 1) * 10
-        })
+        }
+
+        if (key) { 
+            opt.where =  {
+                [Op.or]: {
+                    id: { [Op.like]: `%${key}%` },
+                    nome: { [Op.like]: `%${key}%` },
+                    codigo: { [Op.like]: `%${key}%` }
+                }}
+
+
+        }
+        Produto.findAndCountAll(opt)
             .then(({ count: total, rows: produtos }) => {
                 let totalPagina = Math.round(total / 10)
                 res.status(200).send({ produtos, totalPagina });
@@ -111,28 +124,13 @@ const produtosController = {
 
     },
 
-    search: (req, res) => {
-        let { page = 1 } = req.query
+    getById: (req, res) => {
         let key  = req.params.id;
-        let opt = {
-            order: [[`nome`, `ASC`]], limit: 10,
-            offset: (page - 1) * 10
-        }
-
-        if (key) { 
-            opt.where =  {
-                [Op.or]: {
-                    id: { [Op.like]: `%${key}%` },
-                    nome: { [Op.like]: `%${key}%` },
-                    codigo: { [Op.like]: `%${key}%` }
-                }}
-
-
-        }
-        Produto.findAndCountAll(opt)
-            .then(({ count: total, rows: produtos }) => {
-                let totalPagina = Math.round(total / 10)
-                res.status(200).send({ produtos, totalPagina });
+        
+        Produto.findByPk(key)
+            .then(produto => {
+               
+                res.status(200).send(produto);
             })
             .catch(err => {
                 res.status(500).send({
