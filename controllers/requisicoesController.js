@@ -1,7 +1,7 @@
 const requisicoesController = {
     index: (req, res) => {
         
-        res.render('requisicoes')
+       // res.render('requisicoes')
     }
 }
 module.exports = requisicoesController

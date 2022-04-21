@@ -27,12 +27,14 @@ const usuariosController = {
 
 
         }
-        usuario.findAndCountAll(opt)
+        Usuario.findAndCountAll(opt)
             .then(({ count: total, rows: usuarios }) => {
+                console.log(usuarios)
                 let totalPagina = Math.round(total / 10)
                 res.status(200).send({ usuarios, totalPagina });
             })
             .catch(err => {
+                console.log(err)
                 res.status(500).send({
                     message:
                         err.message || 'Erro'
@@ -45,7 +47,7 @@ const usuariosController = {
 
     store: (req, res) => {
         const { nome, sobrenome, setor, ativo, perfil, email, senha } = req.body;
-        usuario.create({
+        Usuario.create({
             nome,
             sobrenome,
             setor,
@@ -71,7 +73,7 @@ const usuariosController = {
     update: (req, res) => {
         const { id } = req.params;
         const { nome, sobrenome, setor, ativo, perfil, email, senha } = req.body;
-        usuario.update({
+        Usuario.update({
             nome,
             sobrenome,
             setor,
@@ -101,7 +103,7 @@ const usuariosController = {
 
     consult: (req, res) => {
         const { id } = req.params;
-        usuario.findByPk(id)
+        Usuario.findByPk(id)
 
             .then(usuario => {
                 res.status(200).send(usuario);
@@ -119,7 +121,7 @@ const usuariosController = {
 
     destroy: (req, res) => {
         const { id } = req.params;
-        usuario.destroy({
+        Usuario.destroy({
             where: { id }
 
         })
@@ -140,7 +142,7 @@ const usuariosController = {
     getById: (req, res) => {
         let key  = req.params.id;
         
-        usuario.findByPk(key)
+        Usuario.findByPk(key)
             .then(usuario => {
                
                 res.status(200).send(usuario);
