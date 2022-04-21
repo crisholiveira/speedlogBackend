@@ -3,14 +3,31 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
 
+
+
 const usuariosController = {
-    index: (req, res) => {
-        let { page = 1 } = req.query
-        Usuario.findAndCountAll({
+    getAll: (req, res) => {
+        let { page = 1, filtro: key } = req.query        
+        let opt = {
+            order: [[`nome`, `ASC`]], 
             limit: 10,
             offset: (page - 1) * 10
+        }
 
-        })
+        if (key) { 
+            opt.where =  {
+                [Op.or]: {
+                    id: { [Op.like]: `%${key}%` },
+                    nome: { [Op.like]: `%${key}%` },
+                    sobrenome: { [Op.like]: `%${key}%` },
+                    setor: { [Op.like]: `%${key}%` },
+                    perfil: { [Op.like]: `%${key}%` },
+                    email: { [Op.like]: `%${key}%` }
+                }}
+
+
+        }
+        usuario.findAndCountAll(opt)
             .then(({ count: total, rows: usuarios }) => {
                 let totalPagina = Math.round(total / 10)
                 res.status(200).send({ usuarios, totalPagina });
@@ -21,22 +38,21 @@ const usuariosController = {
                         err.message || 'Erro'
                 })
             })
+
     },
 
-    /*create: (req, res) => {
-
-        return res.render('cadastroUsuario')
-    },*/
+    
 
     store: (req, res) => {
-        const { nome, sobrenome, setor, ativo, perfil, email } = req.body;
-        Usuario.create({
+        const { nome, sobrenome, setor, ativo, perfil, email, senha } = req.body;
+        usuario.create({
             nome,
             sobrenome,
             setor,
             ativo,
             perfil,
-            email
+            email,
+            senha
         })
             .then(inclusao => {
                 res.status(200).send(inclusao);
@@ -46,6 +62,7 @@ const usuariosController = {
                     message:
                         err.message || 'Erro'
                 })
+
             })
 
     },
@@ -53,14 +70,15 @@ const usuariosController = {
 
     update: (req, res) => {
         const { id } = req.params;
-        const { nome, sobrenome, setor, ativo, perfil, email } = req.body;
-        Usuario.update({
+        const { nome, sobrenome, setor, ativo, perfil, email, senha } = req.body;
+        usuario.update({
             nome,
             sobrenome,
             setor,
             ativo,
             perfil,
-            email
+            email,
+            senha
         },
             {
                 where: {
@@ -68,8 +86,64 @@ const usuariosController = {
                 }
 
             })
+
             .then(usuario => {
-                res.status(200).send(usuario)
+                res.status(200).send(usuario);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || 'Erro'
+                })
+
+            })
+    },
+
+    consult: (req, res) => {
+        const { id } = req.params;
+        usuario.findByPk(id)
+
+            .then(usuario => {
+                res.status(200).send(usuario);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                        err.message || 'Erro'
+                })
+
+            })
+    },
+
+
+
+    destroy: (req, res) => {
+        const { id } = req.params;
+        usuario.destroy({
+            where: { id }
+
+        })
+            .then(() => {
+                res.sendStatus(200)
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(500).send({
+                    message:
+                        err.message || 'Erro'
+                })
+
+            })
+
+    },
+
+    getById: (req, res) => {
+        let key  = req.params.id;
+        
+        usuario.findByPk(key)
+            .then(usuario => {
+               
+                res.status(200).send(usuario);
             })
             .catch(err => {
                 res.status(500).send({
@@ -77,77 +151,7 @@ const usuariosController = {
                         err.message || 'Erro'
                 })
             })
-
     },
-
-    consult: (req, res) => {
-        const { id } = req.params;
-        Usuario.findByPk(id)
-        .then(usuario => {
-            res.status(200).send(usuario);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || 'Erro'
-            })
-
-        })
-
-},
-
-    destroy: (req, res) => {
-        const { id } = req.params;
-Usuario.destroy({
-    where: { id }
-
-})
-    .then(usuario => {
-        res.status(200).send(usuario);
-    })
-    .catch(err => {
-        res.status(500).send({
-            message:
-                err.message || 'Erro'
-        })
-
-    })
-        
-
-    },
-
-
-
-search: (req, res) => {
-    let { page = 1 } = req.query
-    let key = req.params.id;
-    let opt = {
-        order: [[`nome`, `ASC`]], limit: 10,
-        offset: (page - 1) * 10
-    }
-
-    if (key) {
-        opt.where = {
-            [Op.or]: {
-                id: { [Op.like]: `%${key}%` },
-                nome: { [Op.like]: `%${key}%` },
-                sobrenome: { [Op.like]: `%${key}%` }
-            }
-        }
-    }
-    Usuario.findAndCountAll(opt)
-        .then(({ count: total, rows: usuarios }) => {
-            let totalPagina = Math.round(total / 10)
-            res.status(200).send({ usuarios, totalPagina });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || 'Erro'
-            })
-        })
-},
-
 }
 
 module.exports = usuariosController
