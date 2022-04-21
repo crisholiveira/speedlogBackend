@@ -111,10 +111,11 @@ const produtosController = {
             where: { id }
 
         })
-            .then(produto => {
-                res.status(200).send(produto);
+            .then(() => {
+                res.sendStatus(200)
             })
             .catch(err => {
+                console.log(err)
                 res.status(500).send({
                     message:
                         err.message || 'Erro'
