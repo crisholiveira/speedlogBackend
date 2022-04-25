@@ -4,7 +4,7 @@ const listaUsuariosController = {
     index: async (req, res) => {
         let usuarios = await Usuario.findAll()
         
-            return res.render('listaUsuarios', {usuarios})       
+            return res.json( usuarios)       
         
     }
 }

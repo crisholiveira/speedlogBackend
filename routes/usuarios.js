@@ -22,3 +22,10 @@ router.put('/:id', usuariosController.update)
 router.delete('/:id', usuariosController.destroy)
 
 module.exports = router;
+
+
+
+
+
+
+ 

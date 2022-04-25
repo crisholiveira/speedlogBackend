@@ -1,7 +1,7 @@
 const estoqueController = {
     index: (req, res) => {
         
-        res.render('estoque')
+        //res.render('estoque')
     }
 }
 module.exports = estoqueController
